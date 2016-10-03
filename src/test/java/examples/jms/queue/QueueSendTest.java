@@ -1,6 +1,5 @@
 package examples.jms.queue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class QueueSendTest {

@@ -34,7 +34,7 @@ public class QueueSend {
 	public final static String JMS_FACTORY = "jms/TestConnectionFactory";
 
 	// Defines the queue.
-	public final static String QUEUE = "jms/TestJMSQueue";
+	public final static String QUEUE = "jms/TestDistributedQueue";
 
 	private QueueConnectionFactory qconFactory;
 	private QueueConnection qcon;

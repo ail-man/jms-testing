@@ -6,9 +6,8 @@ import org.junit.Test;
 public class QueueSendTest {
 
 	@Test
-	@Ignore
 	public void main() throws Exception {
-		QueueSend.main(new String[] { "http://localhost:7001/" });
+		QueueSend.main(new String[] { "t3://localhost:7003/" });
 	}
 
 }

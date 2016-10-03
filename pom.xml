@@ -8,5 +8,12 @@
 	<artifactId>jms-testing</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.mq/imq -->
+		<dependency>
+			<groupId>org.glassfish.mq</groupId>
+			<artifactId>imq</artifactId>
+			<version>5.1</version>
+		</dependency>
+	</dependencies>
 </project>

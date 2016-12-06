@@ -1,5 +1,13 @@
 /*
 * https://blogs.oracle.com/soaproactive/entry/jms_step_2_using_the
+* http://ibswings.blogspot.ru/2008/02/integrating-mq-broker-6-with-bea.html
+* https://www.captechconsulting.com/blogs/oracle-weblogic-103-and-ibm-mq---can-they-play-nicely
+* https://dzone.com/articles/solving-ibm-mq-client-error-%E2%80%93
+* http://www-01.ibm.com/support/docview.wss?uid=swg21166937
+* http://www.ibm.com/developerworks/websphere/techjournal/0502_woolf/0502_woolf.html#sec3-1
+* http://www.ibm.com/support/knowledgecenter/SSFKSJ_7.5.0/com.ibm.mq.mig.doc/q001110_.htm
+* http://www.ibm.com/support/knowledgecenter/SSFKSJ_7.5.0/com.ibm.mq.ref.adm.doc/q083460_.htm
+* http://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.ins.doc/q008640_.htm
 * */
 package com.ail.test.jms;
 

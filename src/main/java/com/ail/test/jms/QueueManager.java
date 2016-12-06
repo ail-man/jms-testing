@@ -1,3 +1,6 @@
+/*
+* https://blogs.oracle.com/soaproactive/entry/jms_step_2_using_the
+* */
 package com.ail.test.jms;
 
 import java.util.Hashtable;

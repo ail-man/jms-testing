@@ -1,4 +1,4 @@
-package examples.jms.queue;
+package com.ail.test.jms;
 
 import java.util.Hashtable;
 

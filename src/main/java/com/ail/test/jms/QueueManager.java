@@ -49,14 +49,14 @@ public class QueueManager {
 		this.jmsQueue = jmsQueue;
 	}
 
-	public void init() throws NamingException, JMSException {
+	public void init(String userName, String password) throws NamingException, JMSException {
 		Hashtable<String, String> env = new Hashtable<>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
 		env.put(Context.PROVIDER_URL, url);
 		InitialContext ctx = new InitialContext(env);
 
 		qconFactory = (QueueConnectionFactory) ctx.lookup(jmsFactory);
-		qcon = qconFactory.createQueueConnection();
+		qcon = qconFactory.createQueueConnection(userName, password);
 		qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
 		queue = (Queue) ctx.lookup(jmsQueue);
 		qsender = qsession.createSender(queue);

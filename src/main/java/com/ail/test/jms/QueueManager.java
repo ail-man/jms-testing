@@ -1,13 +1,20 @@
 /*
-* https://blogs.oracle.com/soaproactive/entry/jms_step_2_using_the
-* http://ibswings.blogspot.ru/2008/02/integrating-mq-broker-6-with-bea.html
 * https://www.captechconsulting.com/blogs/oracle-weblogic-103-and-ibm-mq---can-they-play-nicely
+* http://ibswings.blogspot.ru/2008/02/integrating-mq-broker-6-with-bea.html
+* https://blogs.oracle.com/soaproactive/entry/jms_step_2_using_the
 * https://dzone.com/articles/solving-ibm-mq-client-error-%E2%80%93
+* http://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.mig.doc/q001110_.htm
+* http://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.ref.adm.doc/q083460_.htm
+* http://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.ins.doc/q008640_.htm
 * http://www-01.ibm.com/support/docview.wss?uid=swg21166937
 * http://www.ibm.com/developerworks/websphere/techjournal/0502_woolf/0502_woolf.html#sec3-1
+* http://www.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.sec.doc/q010530_.htm
+* https://www.ibm.com/developerworks/community/forums/html/topic?id=35d58148-5c89-49e3-a61c-4f53944fa11e
+* http://www.trevoroconnell.com/2012/01/basic-send-message-to-mq-with-java-and.html
+* https://www-01.ibm.com/support/docview.wss?uid=swg27048082&aid=1
+* http://stackoverflow.com/questions/30501666/web-sphere-7-5-add-user
 * http://www.ibm.com/support/knowledgecenter/SSFKSJ_7.5.0/com.ibm.mq.mig.doc/q001110_.htm
-* http://www.ibm.com/support/knowledgecenter/SSFKSJ_7.5.0/com.ibm.mq.ref.adm.doc/q083460_.htm
-* http://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.ins.doc/q008640_.htm
+* http://stackoverflow.com/questions/25911557/websphere-mq-v8-mqrc-not-authorized-2035
 * */
 package com.ail.test.jms;
 

@@ -13,7 +13,7 @@ public class QueueRecieveTest {
 	@Test
 	public void send() throws Exception {
 		QueueManager qm = new QueueManager(URL, RECIEVER_JMS_FACTORY, RECIEVER_QUEUE);
-		qm.init("mquser", "mquser");
+		qm.init();
 
 		qm.send("Test message " + System.currentTimeMillis());
 	}
@@ -21,7 +21,7 @@ public class QueueRecieveTest {
 	@Test
 	public void recieve() throws Exception {
 		QueueManager qm = new QueueManager(URL, RECIEVER_JMS_FACTORY, RECIEVER_QUEUE);
-		qm.init("mquser", "mquser");
+		qm.init();
 
 		System.out.println(((TextMessage) qm.recieve()).getText());
 	}

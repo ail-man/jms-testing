@@ -14,19 +14,25 @@ import org.junit.Test;
 
 public class IBMMQSendTest {
 
+	private static final String HOST_NAME = "mint";
+	private static final String QUEUE_MANAGER_NAME = "MQTest";
+	private static final String CHANNEL_NAME = "HPT5.CLNT.WL";
+	private static final String USERID = "mquser";
+	private static final String PASSWORD = "mquser";
+
 	@Test
 	public void testSendAndRecieve() throws Exception {
 		MQQueueConnectionFactory cf = new MQQueueConnectionFactory();
-		cf.setHostName("mint");
+		cf.setHostName(HOST_NAME);
 		cf.setPort(1414);
 
 		cf.setIntProperty(WMQConstants.WMQ_CONNECTION_MODE, WMQConstants.WMQ_CM_CLIENT);
 
-		cf.setQueueManager("MQTest");
-		cf.setChannel("HPT5.CLNT.WL");
+		cf.setQueueManager(QUEUE_MANAGER_NAME);
+		cf.setChannel(CHANNEL_NAME);
 
 		//			MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
-		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection("mquser", "mquser");
+		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection(USERID, PASSWORD);
 
 		MQQueueSession session = (MQQueueSession) connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
 		MQQueue queue = (MQQueue) session.createQueue("queue:///MQTestQueue");

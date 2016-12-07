@@ -57,13 +57,28 @@ public class QueueManager {
 	}
 
 	public void init(String userName, String password) throws NamingException, JMSException {
+		InitialContext ctx = getInitialContext();
+		qcon = qconFactory.createQueueConnection(userName, password);
+		initVariables(ctx);
+	}
+
+	public void init() throws NamingException, JMSException {
+		InitialContext ctx = getInitialContext();
+		qcon = qconFactory.createQueueConnection();
+		initVariables(ctx);
+	}
+
+	private InitialContext getInitialContext() throws NamingException {
 		Hashtable<String, String> env = new Hashtable<>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
 		env.put(Context.PROVIDER_URL, url);
 		InitialContext ctx = new InitialContext(env);
 
 		qconFactory = (QueueConnectionFactory) ctx.lookup(jmsFactory);
-		qcon = qconFactory.createQueueConnection(userName, password);
+		return ctx;
+	}
+
+	private void initVariables(InitialContext ctx) throws JMSException, NamingException {
 		qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
 		queue = (Queue) ctx.lookup(jmsQueue);
 		qsender = qsession.createSender(queue);

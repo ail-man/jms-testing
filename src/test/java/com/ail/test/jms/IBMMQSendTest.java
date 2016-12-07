@@ -23,13 +23,13 @@ public class IBMMQSendTest {
 		cf.setIntProperty(WMQConstants.WMQ_CONNECTION_MODE, WMQConstants.WMQ_CM_CLIENT);
 
 		cf.setQueueManager("MQTest");
-		cf.setChannel("SYSTEM.DEF.SVRCONN");
+		cf.setChannel("HPT5.CLNT.WL");
 
 		//			MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
-		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection("mint", "mint");
+		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection("mquser", "mquser");
 
 		MQQueueSession session = (MQQueueSession) connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
-		MQQueue queue = (MQQueue) session.createQueue("queue:///MQSenderQueue");
+		MQQueue queue = (MQQueue) session.createQueue("queue:///MQTestQueue");
 
 		MQQueueSender sender = (MQQueueSender) session.createSender(queue);
 		MQQueueReceiver receiver = (MQQueueReceiver) session.createReceiver(queue);
@@ -44,7 +44,7 @@ public class IBMMQSendTest {
 		sender.send(message);
 		System.out.println("Message Sent OK.\n");
 
-		System.out.println("Recieve message from Queue MQSenderQueue: " + message.getText());
+		System.out.println("Recieve message from Queue MQTestQueue: " + message.getText());
 		System.out.println(((TextMessage) receiver.receive(1000L)).getText());
 		System.out.println("Message Recieved OK.\n");
 

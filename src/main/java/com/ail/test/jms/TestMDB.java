@@ -20,16 +20,16 @@ import javax.jms.TextMessage;
  * @author Ishwara Varnasi
  * @date Feb 17, 2008
  */
-@MessageDriven(name = "TestMDB", mappedName = "jms/WLReceiverQueue",
+@MessageDriven(name = "TestMDB", mappedName = "jms/WLRelayQueue",
 		activationConfig = { @ActivationConfigProperty(
 				propertyName = "destinationType",
 				propertyValue = "javax.jms.Queue") }
 )
 public class TestMDB implements MessageListener {
 
-	@Resource(name = "WLReplyQueue", mappedName = "jms/WLReplyQueue")
+	@Resource(name = "WLRelayQueue", mappedName = "jms/WLRelayQueue")
 	private javax.jms.Queue queue;
-	@Resource(name = "WLReplyQCF", mappedName = "jms/WLReplyQCF")
+	@Resource(name = "WLRelayQCF", mappedName = "jms/WLRelayQCF")
 	private javax.jms.QueueConnectionFactory tcf;
 
 	public void onMessage(Message msg) {

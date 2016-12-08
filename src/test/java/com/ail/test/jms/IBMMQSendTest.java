@@ -50,9 +50,8 @@ public class IBMMQSendTest {
 		sender.send(message);
 		System.out.println("Message Sent OK.\n");
 
-		System.out.println("Recieve message from Queue MQTestQueue: " + message.getText());
-		System.out.println(((TextMessage) receiver.receive(1000L)).getText());
-		System.out.println("Message Recieved OK.\n");
+		System.out.println("Recieve message from Queue MQTestQueue...");
+		System.out.println("Message Recieved: " + ((TextMessage) receiver.receive(1000L)).getText());
 
 		sender.close();
 		receiver.close();

@@ -25,7 +25,8 @@ public class TestJms {
 	}
 
 	public void send(String fileName) throws IOException, JMSException {
-		queueManager.send(fileReader.readFile(fileName));
+		String message = fileReader.readFile(fileName);
+		queueManager.send(message);
 	}
 
 }

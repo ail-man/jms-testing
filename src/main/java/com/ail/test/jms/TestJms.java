@@ -8,22 +8,24 @@ import javax.naming.NamingException;
 import com.ail.test.common.FileReader;
 
 public class TestJms {
+	private FileReader fileReader;
+	private QueueManager queueManager;
 
-	public static void main(final String[] args) {
-		final String URL = args[0];
-		final String RECIEVER_JMS_FACTORY = args[1];
-		final String RECIEVER_QUEUE = args[2];
-		final String FILE_NAME = args[3];
+	public TestJms(String url, String jmsFactory, String jmsQueue) {
+		fileReader = new FileReader();
+		queueManager = new QueueManager(url, jmsFactory, jmsQueue);
+	}
 
-		QueueManager qm = new QueueManager(URL, RECIEVER_JMS_FACTORY, RECIEVER_QUEUE);
-		FileReader fileReader = new FileReader();
-
-		try {
-			qm.init();
-			qm.send(fileReader.readFile(FILE_NAME));
-		} catch (NamingException | JMSException | IOException e) {
-			e.printStackTrace();
+	public void init(String login, String pass) throws JMSException, NamingException {
+		if (login == null) {
+			queueManager.init();
+		} else {
+			queueManager.init(login, pass);
 		}
+	}
+
+	public void send(String fileName) throws IOException, JMSException {
+		queueManager.send(fileReader.readFile(fileName));
 	}
 
 }

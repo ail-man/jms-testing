@@ -10,22 +10,25 @@ import com.ibm.mq.jms.MQQueueReceiver;
 import com.ibm.mq.jms.MQQueueSender;
 import com.ibm.mq.jms.MQQueueSession;
 import com.ibm.msg.client.wmq.WMQConstants;
-import org.junit.Test;
 
 public class IBMMQSendTest {
 
 	private static final String HOST_NAME = "mint";
 	private static final String QUEUE_MANAGER_NAME = "MQTest";
 	private static final String CHANNEL_NAME = "HPT5.CLNT.WL";
+	private static final int PORT = 1414;
 	private static final String USERID = "mquser";
 	private static final String PASSWORD = "mquser";
 	private static final String SSL_CIPHER_SUITE = "SSL_RSA_WITH_AES_256_CBC_SHA256";
 
-	@Test
-	public void testSendAndRecieve() throws Exception {
+	public static void main(String[] args) throws Exception {
+		System.setProperty("javax.net.ssl.trustStore", "D:/Temp/mint/1/key.jks");
+		System.setProperty("javax.net.ssl.trustStore", "D:/Temp/mint/1/key.jks");
+		System.setProperty("javax.net.ssl.trustStorePassword", "mint");
+
 		MQQueueConnectionFactory cf = new MQQueueConnectionFactory();
 		cf.setHostName(HOST_NAME);
-		cf.setPort(1414);
+		cf.setPort(PORT);
 
 		cf.setIntProperty(WMQConstants.WMQ_CONNECTION_MODE, WMQConstants.WMQ_CM_CLIENT);
 
@@ -33,7 +36,7 @@ public class IBMMQSendTest {
 		cf.setChannel(CHANNEL_NAME);
 
 		cf.setSSLCipherSuite(SSL_CIPHER_SUITE);
-		cf.setSSLFipsRequired(false);
+		//		cf.setSSLFipsRequired(true);
 
 		//			MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
 		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection(USERID, PASSWORD);

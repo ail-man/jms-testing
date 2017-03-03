@@ -19,6 +19,7 @@ public class IBMMQSendTest {
 	private static final String CHANNEL_NAME = "HPT5.CLNT.WL";
 	private static final String USERID = "mquser";
 	private static final String PASSWORD = "mquser";
+	private static final String SSL_CIPHER_SUITE = "SSL_RSA_WITH_AES_256_CBC_SHA256";
 
 	@Test
 	public void testSendAndRecieve() throws Exception {
@@ -30,6 +31,9 @@ public class IBMMQSendTest {
 
 		cf.setQueueManager(QUEUE_MANAGER_NAME);
 		cf.setChannel(CHANNEL_NAME);
+
+		cf.setSSLCipherSuite(SSL_CIPHER_SUITE);
+		cf.setSSLFipsRequired(false);
 
 		//			MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
 		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection(USERID, PASSWORD);

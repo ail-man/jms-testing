@@ -1,7 +1,9 @@
 package com.ail.test.jms;
 
-import com.ibm.mq.MQEnvironment;
+import java.util.Hashtable;
+
 import com.ibm.mq.MQQueueManager;
+import com.ibm.mq.constants.CMQC;
 
 public class IBMMQSendTest {
 
@@ -11,19 +13,28 @@ public class IBMMQSendTest {
 	private static final int PORT = 1414;
 	private static final String USERID = "mquser";
 	private static final String PASSWORD = "mquser";
-	private static final String SSL_CIPHER_SUITE = "SSL_RSA_WITH_AES_256_CBC_SHA256";
+	private static final String SSL_CIPHER_SUITE = "SSL_RSA_WITH_3DES_EDE_CBC_SHA";
 
 	public static void main(String[] args) throws Exception {
 		System.setProperty("javax.net.ssl.trustStore", "D:/Temp/mint/APP1.jks");
 		System.setProperty("javax.net.ssl.keyStore", "D:/Temp/mint/APP1.jks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "mint");
+		//		System.setProperty("com.ibm.mq.cfg.useIBMCipherMappings", "false");
 
-		MQEnvironment.hostname = HOST_NAME;
-		MQEnvironment.port = PORT;
-		MQEnvironment.channel = CHANNEL_NAME;
-		MQEnvironment.sslCipherSuite = SSL_CIPHER_SUITE;
+		//		MQEnvironment.hostname = HOST_NAME;
+		//		MQEnvironment.port = PORT;
+		//		MQEnvironment.channel = CHANNEL_NAME;
+		//		MQEnvironment.sslCipherSuite = SSL_CIPHER_SUITE;
 
-		MQQueueManager qMgr = new MQQueueManager(QUEUE_MANAGER_NAME);
+		Hashtable<String, Object> mqht = new Hashtable<>();
+		mqht.put(CMQC.CHANNEL_PROPERTY, CHANNEL_NAME);
+		mqht.put(CMQC.HOST_NAME_PROPERTY, HOST_NAME);
+		mqht.put(CMQC.PORT_PROPERTY, PORT);
+		mqht.put(CMQC.SSL_CIPHER_SUITE_PROPERTY, SSL_CIPHER_SUITE);
+		mqht.put(CMQC.USER_ID_PROPERTY, USERID);
+		mqht.put(CMQC.PASSWORD_PROPERTY, PASSWORD);
+
+		MQQueueManager qMgr = new MQQueueManager(QUEUE_MANAGER_NAME, mqht);
 
 		//
 		//		MQQueueConnectionFactory cf = new MQQueueConnectionFactory();

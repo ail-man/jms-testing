@@ -21,7 +21,7 @@ public class IBMMQSendTest {
 		System.setProperty("javax.net.ssl.trustStore", "D:/Temp/mint/APP1.jks");
 		System.setProperty("javax.net.ssl.trustStorePassword", "mint");
 
-		System.setProperty("javax.net.debug", "true");
+		System.setProperty("javax.net.debug", "all");
 		System.setProperty("com.ibm.mq.cfg.useIBMCipherMappings", "false");
 		System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
 

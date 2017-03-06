@@ -13,7 +13,7 @@ public class IBMMQSendTest {
 	private static final int PORT = 1414;
 	private static final String USERID = "mquser";
 	private static final String PASSWORD = "mquser";
-	private static final String SSL_CIPHER_SUITE = "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256";
+	private static final String SSL_CIPHER_SUITE = "SSL_RSA_WITH_3DES_EDE_CBC_SHA";
 
 	public static void main(String[] args) throws Exception {
 		System.setProperty("javax.net.ssl.keyStore", "D:/Temp/mint/APP1.jks");

@@ -16,9 +16,11 @@ public class IBMMQSendTest {
 	private static final String SSL_CIPHER_SUITE = "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256";
 
 	public static void main(String[] args) throws Exception {
-		System.setProperty("javax.net.ssl.trustStore", "D:/Temp/mint/APP1.jks");
 		System.setProperty("javax.net.ssl.keyStore", "D:/Temp/mint/APP1.jks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "mint");
+		System.setProperty("javax.net.ssl.trustStore", "D:/Temp/mint/APP1.jks");
+		System.setProperty("javax.net.ssl.trustStorePassword", "mint");
+
 		System.setProperty("javax.net.debug", "true");
 		System.setProperty("com.ibm.mq.cfg.useIBMCipherMappings", "false");
 		System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");

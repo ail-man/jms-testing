@@ -20,6 +20,7 @@ public class IBMMQSSLSendTest {
 	private static final String USERID = "mquser";
 	private static final String PASSWORD = "mquser";
 	private static final String SSL_CIPHER_SUITE = "TLS_RSA_WITH_AES_128_CBC_SHA256";
+	private static final String QUEUE_NAME = "MQTestQueue";
 
 	public static void main(String[] args) throws Exception {
 		//		System.setProperty("javax.net.ssl.keyStore", "D:/Temp/mint/APP1.jks");
@@ -64,7 +65,7 @@ public class IBMMQSSLSendTest {
 		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection(USERID, PASSWORD);
 
 		MQQueueSession session = (MQQueueSession) connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
-		MQQueue queue = (MQQueue) session.createQueue("queue:///MQTestQueue");
+		MQQueue queue = (MQQueue) session.createQueue("queue:///" + QUEUE_NAME);
 
 		MQQueueSender sender = (MQQueueSender) session.createSender(queue);
 		MQQueueReceiver receiver = (MQQueueReceiver) session.createReceiver(queue);
@@ -79,7 +80,7 @@ public class IBMMQSSLSendTest {
 		sender.send(message);
 		System.out.println("Message Sent OK.\n");
 
-		System.out.println("Recieve message from Queue MQTestQueue...");
+		System.out.println("Recieve message from Queue " + QUEUE_NAME + "...");
 		System.out.println("Message Recieved: " + ((TextMessage) receiver.receive(1000L)).getText());
 
 		sender.close();

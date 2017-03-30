@@ -1,15 +1,10 @@
 package com.ail.test.jms;
 
-import javax.jms.Session;
-import javax.jms.TextMessage;
+import java.util.Hashtable;
 
-import com.ibm.mq.jms.MQQueue;
-import com.ibm.mq.jms.MQQueueConnection;
-import com.ibm.mq.jms.MQQueueConnectionFactory;
-import com.ibm.mq.jms.MQQueueReceiver;
-import com.ibm.mq.jms.MQQueueSender;
-import com.ibm.mq.jms.MQQueueSession;
-import com.ibm.msg.client.wmq.WMQConstants;
+import com.ibm.mq.MQMessage;
+import com.ibm.mq.MQQueueManager;
+import com.ibm.mq.constants.CMQC;
 
 public class IBMMQSSLSendTest {
 
@@ -39,55 +34,59 @@ public class IBMMQSSLSendTest {
 		//		MQEnvironment.sslCipherSuite = SSL_CIPHER_SUITE;
 
 		// 2nd option
-		//		Hashtable<String, Object> mqht = new Hashtable<>();
-		//		mqht.put(CMQC.CHANNEL_PROPERTY, CHANNEL_NAME);
-		//		mqht.put(CMQC.HOST_NAME_PROPERTY, HOST_NAME);
-		//		mqht.put(CMQC.PORT_PROPERTY, PORT);
-		//		mqht.put(CMQC.SSL_CIPHER_SUITE_PROPERTY, SSL_CIPHER_SUITE);
-		//		mqht.put(CMQC.USER_ID_PROPERTY, USERID);
-		//		mqht.put(CMQC.PASSWORD_PROPERTY, PASSWORD);
-		//		MQQueueManager qMgr = new MQQueueManager(QUEUE_MANAGER_NAME, mqht);
+		Hashtable<String, Object> mqht = new Hashtable<>();
+		mqht.put(CMQC.CHANNEL_PROPERTY, CHANNEL_NAME);
+		mqht.put(CMQC.HOST_NAME_PROPERTY, HOST_NAME);
+		mqht.put(CMQC.PORT_PROPERTY, PORT);
+		mqht.put(CMQC.SSL_CIPHER_SUITE_PROPERTY, SSL_CIPHER_SUITE);
+		mqht.put(CMQC.USER_ID_PROPERTY, USERID);
+		mqht.put(CMQC.PASSWORD_PROPERTY, PASSWORD);
+		MQQueueManager qMgr = new MQQueueManager(QUEUE_MANAGER_NAME, mqht);
 
-		// 3rd option
-		MQQueueConnectionFactory cf = new MQQueueConnectionFactory();
-		cf.setHostName(HOST_NAME);
-		cf.setPort(PORT);
+		MQMessage message = new MQMessage();
+		message.writeObject("Basic Queue Test " + System.currentTimeMillis() % 1000);
+		qMgr.put(QUEUE_NAME, QUEUE_MANAGER_NAME, message);
 
-		cf.setIntProperty(WMQConstants.WMQ_CONNECTION_MODE, WMQConstants.WMQ_CM_CLIENT);
-
-		cf.setQueueManager(QUEUE_MANAGER_NAME);
-		cf.setChannel(CHANNEL_NAME);
-
-		cf.setSSLCipherSuite(SSL_CIPHER_SUITE);
-		//		cf.setSSLFipsRequired(true); // not needed
-
-		//			MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
-		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection(USERID, PASSWORD);
-
-		MQQueueSession session = (MQQueueSession) connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
-		MQQueue queue = (MQQueue) session.createQueue("queue:///" + QUEUE_NAME);
-
-		MQQueueSender sender = (MQQueueSender) session.createSender(queue);
-		MQQueueReceiver receiver = (MQQueueReceiver) session.createReceiver(queue);
-
-		long uniqueNumber = System.currentTimeMillis() % 1000;
-
-		TextMessage message = session.createTextMessage("Basic Queue Test " + uniqueNumber);
-
-		// Start the connection
-		connection.start();
-		System.out.println("Sent message to Queue MQSenderQueue: " + message.getText());
-		sender.send(message);
-		System.out.println("Message Sent OK.\n");
-
-		System.out.println("Recieve message from Queue " + QUEUE_NAME + "...");
-		System.out.println("Message Recieved: " + ((TextMessage) receiver.receive(1000L)).getText());
-
-		sender.close();
-		receiver.close();
-
-		session.close();
-		connection.close();
+		//		// 3rd option
+		//		MQQueueConnectionFactory cf = new MQQueueConnectionFactory();
+		//		cf.setHostName(HOST_NAME);
+		//		cf.setPort(PORT);
+		//
+		//		cf.setIntProperty(WMQConstants.WMQ_CONNECTION_MODE, WMQConstants.WMQ_CM_CLIENT);
+		//
+		//		cf.setQueueManager(QUEUE_MANAGER_NAME);
+		//		cf.setChannel(CHANNEL_NAME);
+		//
+		//		cf.setSSLCipherSuite(SSL_CIPHER_SUITE);
+		//		//		cf.setSSLFipsRequired(true); // not needed
+		//
+		//		//			MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection();
+		//		MQQueueConnection connection = (MQQueueConnection) cf.createQueueConnection(USERID, PASSWORD);
+		//
+		//		MQQueueSession session = (MQQueueSession) connection.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+		//		MQQueue queue = (MQQueue) session.createQueue("queue:///" + QUEUE_NAME);
+		//
+		//		MQQueueSender sender = (MQQueueSender) session.createSender(queue);
+		//		MQQueueReceiver receiver = (MQQueueReceiver) session.createReceiver(queue);
+		//
+		//		long uniqueNumber = System.currentTimeMillis() % 1000;
+		//
+		//		TextMessage message = session.createTextMessage("Basic Queue Test " + uniqueNumber);
+		//
+		//		// Start the connection
+		//		connection.start();
+		//		System.out.println("Sent message to Queue MQSenderQueue: " + message.getText());
+		//		sender.send(message);
+		//		System.out.println("Message Sent OK.\n");
+		//
+		//		System.out.println("Recieve message from Queue " + QUEUE_NAME + "...");
+		//		System.out.println("Message Recieved: " + ((TextMessage) receiver.receive(1000L)).getText());
+		//
+		//		sender.close();
+		//		receiver.close();
+		//
+		//		session.close();
+		//		connection.close();
 	}
 
 }

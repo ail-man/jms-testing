@@ -22,14 +22,14 @@ public class IBMMQSSLSendTest {
 	private static final String SSL_CIPHER_SUITE = "TLS_RSA_WITH_AES_128_CBC_SHA256";
 
 	public static void main(String[] args) throws Exception {
-		System.setProperty("javax.net.ssl.keyStore", "D:/Temp/mint/APP1.jks");
-		System.setProperty("javax.net.ssl.keyStorePassword", "mint");
+		//		System.setProperty("javax.net.ssl.keyStore", "D:/Temp/mint/APP1.jks");
+		//		System.setProperty("javax.net.ssl.keyStorePassword", "mint");
 		System.setProperty("javax.net.ssl.trustStore", "D:/Temp/mint/APP1.jks");
-		System.setProperty("javax.net.ssl.trustStorePassword", "mint");
+		//		System.setProperty("javax.net.ssl.trustStorePassword", "mint");
 
 		System.setProperty("javax.net.debug", "all");
 		System.setProperty("com.ibm.mq.cfg.useIBMCipherMappings", "false");
-		System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+		//		System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
 
 		// 1st option
 		//		MQEnvironment.hostname = HOST_NAME;
